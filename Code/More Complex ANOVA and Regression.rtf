@@ -1,0 +1,431 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2511
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green128\blue0;\red0\green0\blue255;\red0\green0\blue128;
+\red0\green128\blue128;\red128\green0\blue128;\red255\green0\blue0;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c50196\c0;\csgenericrgb\c0\c0\c100000;\csgenericrgb\c0\c0\c50196;
+\csgenericrgb\c0\c50196\c50196;\csgenericrgb\c50196\c0\c50196;\csgenericrgb\c100000\c0\c0;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs20 \cf2 /******************************************************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\cf2 /****************    Day 5 / Lab 5     ****************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\
+\
+\cf2 /***********************************/\cf0 \
+\cf2 /* Two-Way ANOVA with Interactions */\cf0 \
+\cf2 /***********************************/\cf0 \
+\
+\cf2 *ods html close;\cf0 \
+\cf2 *ods rtf file="More Complex ANOVA & Regression SAS Report.rtf";\cf0 \
+\cf2 *ods rtf;\cf0 \
+\cf2 *options nodate nonumber ls=95 ps=80;\cf0 \
+\
+\cf2 /*******************/\cf0 \
+\cf2 /* Variable MACROS */\cf0 \
+\cf2 /*******************/\cf0 \
+\
+\cf2 /* Defining Categorical Variables */\cf0 \
+\cf3 %let\cf0  categorical=House_Style2 Overall_Qual2 Overall_Cond2 Fireplaces \
+         Season_Sold Garage_Type_2 Foundation_2 Heating_QC \
+         Masonry_Veneer Lot_Shape_2 Central_Air;\
+\
+\cf2 /* Defining Interval Variables */\cf0 \
+\cf3 %let\cf0  interval=Gr_Liv_Area Basement_Area Garage_Area Deck_Porch_Area \
+         Lot_Area Age_Sold Bedroom_AbvGr Total_Bathroom;\
+\
+\
+\cf2 /***********************************/\cf0 \
+\cf2 /* Two-Way ANOVA with Interactions */\cf0 \
+\cf2 /***********************************/\cf0 \
+\
+\cf2 /* Exploring Data for Two-Way ANOVA */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 means
+\f0\b0 \cf0  \cf3 data\cf0 =bootcamp.ameshousing3\
+           \cf3 mean\cf0  \cf3 var\cf0  \cf3 std\cf0  \cf3 nway\cf0 ;\
+    \cf3 class\cf0  Season_Sold Heating_QC;\
+    \cf3 var\cf0  SalePrice;\
+    \cf3 format\cf0  Season_Sold \cf5 Season.\cf0 ;\
+    \cf3 title\cf0  \cf6 'Selected Descriptive Statistics'\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 sgplot
+\f0\b0 \cf0  \cf3 data\cf0 =bootcamp.ameshousing3;\
+    \cf3 vline\cf0  Season_Sold / \cf3 group\cf0 =Heating_QC \
+                        \cf3 stat\cf0 =mean \
+                        \cf3 response\cf0 =SalePrice \
+                        \cf3 markers\cf0 ;\
+    \cf3 format\cf0  Season_Sold \cf5 Season.\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ; \
+\
+\cf2 /* Two-Way ANOVA */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 glm
+\f0\b0 \cf0  \cf3 data\cf0 =bootcamp.ameshousing3 \cf3 order\cf0  = internal; \
+	\cf3 class\cf0  Season_Sold Heating_QC; \
+	\cf3 model\cf0  SalePrice = Heating_QC Season_Sold; \
+	\cf3 lsmeans\cf0  Season_Sold / \cf3 diff\cf0  \cf3 adjust\cf0 =tukey; \
+	\cf3 format\cf0  Season_Sold \cf5 Season.\cf0 ; \
+	\cf3 title\cf0  \cf6 "Model with Heating Quality and Season as Predictors"\cf0 ; \
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Two-Way ANOVA with Interactions */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 glm
+\f0\b0 \cf0  \cf3 data\cf0 =bootcamp.ameshousing3 \
+         \cf3 order\cf0 =internal \
+         \cf3 plots\cf0 (only)=intplot;\
+    \cf3 class\cf0  Season_Sold Heating_QC;\
+    \cf3 model\cf0  SalePrice = Heating_QC Season_Sold Heating_QC*Season_Sold / \cf3 ss1\cf0  \cf3 ss3\cf0 ;\
+    \cf3 format\cf0  Season_Sold \cf5 Season.\cf0 ;\
+    \cf3 title\cf0  \cf6 "Model with Heating Quality and Season as Interacting Predictors"\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 quit
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Sliced ANOVA Results */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 glm
+\f0\b0 \cf0  \cf3 data\cf0 =bootcamp.ameshousing3 \
+         \cf3 order\cf0 =internal \
+         \cf3 plots\cf0 (only)=intplot;\
+    \cf3 class\cf0  Season_Sold Heating_QC;\
+    \cf3 model\cf0  SalePrice = Heating_QC|Season_Sold;\
+    \cf3 lsmeans\cf0  Heating_QC*Season_Sold / \cf3 diff\cf0  \cf3 slice\cf0  = Heating_QC;\
+    \cf3 store\cf0  out = interact;\
+    \cf3 title\cf0  \cf6 "Analyze the Effects of Season"\cf0 ;\
+	\cf3 title2\cf0  \cf6 "at Each Level of Heating Quality"\cf0 ;\
+	\cf3 format\cf0  Season_Sold \cf5 Season.\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 quit
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 plm
+\f0\b0 \cf0  restore = interact plots = all; \
+	slice Heating_QC*Season_Sold / sliceby = Heating_QC adjust=tukey; \
+	effectplot interaction(sliceby = Heating_QC) / clm; \
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\
+\cf2 /*************************************/\cf0 \
+\cf2 /* Randomized Block Design for ANOVA */\cf0 \
+\cf2 /*        OPTIONAL SELF STUDY        */\cf0 \
+\cf2 /*************************************/\cf0 \
+\
+\cf2 /* ANOVA with Blocking */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 glm
+\f0\b0 \cf0  \cf3 data\cf0 =bootcamp.MGGarlic_Block \cf3 plots\cf0 (only)=diagnostics;\
+     \cf3 class\cf0  Fertilizer Sector;\
+     \cf3 model\cf0  BulbWt = Fertilizer Sector;\
+     \cf3 title\cf0  \cf6 'ANOVA for Randomized Block Design'\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 quit
+\f0\b0 \cf0 ;\
+\
+\
+\cf2 /******************************************************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\cf2 /****************    Day 6 / Lab 6     ****************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\
+\
+\cf2 /******************************************/\cf0 \
+\cf2 /* Concepts of Multiple Linear Regression */\cf0 \
+\cf2 /******************************************/\cf0 \
+\
+\cf2 /* Fitting a Multiple Linear Regression Model */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 reg
+\f0\b0 \cf0  \cf3 data\cf0 =bootcamp.ameshousing3 ;\
+    \cf3 model\cf0  SalePrice=Basement_Area Lot_Area;\
+    \cf3 title\cf0  \cf6 "Model with Basement Area and Lot Area"\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 quit
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Using PROC GLM for Regression */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 glm
+\f0\b0 \cf0  \cf3 data\cf0  = bootcamp.ameshousing3;\
+	\cf3 model\cf0  SalePrice = Basement_Area Lot_Area;\
+	\cf3 title\cf0  \cf6 "Model with Basement Area and Gross Living Area"\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\
+\cf2 /*********************/\cf0 \
+\cf2 /* Data Partitioning */\cf0 \
+\cf2 /*********************/\cf0 \
+\
+\cf2 /* Creating Validation Data Sets - Data Step*/\cf0 \
+
+\f1\b \cf4 data
+\f0\b0 \cf0  ameshousing3_train ameshousing3_valid;\
+	\cf3 set\cf0  bootcamp.ameshousing3;\
+	random = RAND(\cf6 "Uniform"\cf0 );\
+	\cf3 if\cf0  random <=
+\f1\b \cf5 0.2
+\f0\b0 \cf0  \cf3 then\cf0  \cf3 output\cf0  ameshousing3_valid;\
+	\cf3 else\cf0  \cf3 output\cf0  ameshousing3_train;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Creating Validation Data Sets - PROC SURVEYSELECT*/\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 surveyselect
+\f0\b0 \cf0  \cf3 data\cf0 =bootcamp.ameshousing3 \cf3 method\cf0 =\cf3 srs\cf0  \cf3 rate\cf0 =
+\f1\b \cf5 0.2
+\f0\b0 \cf0 \
+				  \cf3 out\cf0 =ameshousing3_split \cf3 outall\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 data
+\f0\b0 \cf0  ameshousing3_train ameshousing3_valid;\
+	\cf3 set\cf0  ameshousing3_split;\
+	\cf3 if\cf0  Selected = 
+\f1\b \cf5 1
+\f0\b0 \cf0  \cf3 then\cf0  \cf3 output\cf0  ameshousing3_valid;\
+	\cf3 else\cf0  \cf3 output\cf0  ameshousing3_train;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\
+\cf2 /************************/\cf0 \
+\cf2 /* Prediction / Scoring */\cf0 \
+\cf2 /************************/\cf0 \
+\
+\cf2 /* Calculating the Training MAPE */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 reg
+\f0\b0 \cf0  \cf3 data\cf0 =ameshousing3_train \cf3 outest\cf0 =Betas;\
+	\cf3 model\cf0  SalePrice = Basement_Area Lot_Area;\
+    \cf3 title\cf0  \cf6 "Model with Basement Area and Lot Area"\cf0 ;\
+    \cf3 output\cf0  \cf3 out\cf0 =Scored \cf3 predicted\cf0  = pred;\
+    \cf7 store\cf0  out = model;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 quit
+\f0\b0 \cf0 ; \
+\
+
+\f1\b \cf4 data
+\f0\b0 \cf0  MAPE_t;\
+	\cf3 set\cf0  Scored;\
+	AE = abs(pred - SalePrice);\
+	APE = (abs(pred - SalePrice) / SalePrice)*
+\f1\b \cf5 100
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 means
+\f0\b0 \cf0  \cf3 data\cf0 =MAPE_t \cf3 mean\cf0 ;\
+	\cf3 var\cf0  AE APE;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Predicted Values with PROC SCORE - Validation MAPE */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 score
+\f0\b0 \cf0  \cf3 data\cf0 =ameshousing3_valid \cf3 score\cf0 =Betas \cf3 out\cf0 =Scored \cf3 type\cf0 =parms;\
+	\cf3 var\cf0  Basement_Area Lot_Area;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 data
+\f0\b0 \cf0  MAPE_v;\
+	\cf3 set\cf0  Scored;\
+	AE = abs(Model1 - SalePrice);\
+	APE = (abs(Model1 - SalePrice) / SalePrice)*
+\f1\b \cf5 100
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 means
+\f0\b0 \cf0  \cf3 data\cf0 =MAPE_v \cf3 mean\cf0 ;\
+	\cf3 var\cf0  AE APE;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Predicted Values with PROC PLM - Validation MAPE */\cf0 \
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 plm
+\f0\b0 \cf0  restore=model;\
+	score data = ameshousing3_valid out = Scored;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 data
+\f0\b0 \cf0  MAPE_v;\
+	\cf3 set\cf0  Scored;\
+	AE = abs(Predicted - SalePrice);\
+	APE = (abs(Predicted - SalePrice) / SalePrice)*
+\f1\b \cf5 100
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 means
+\f0\b0 \cf0  \cf3 data\cf0 =MAPE_v \cf3 mean\cf0 ;\
+	\cf3 var\cf0  AE APE;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Predicted Values with Data Step - Validation MAPE - SELF STUDY */\cf0 \
+
+\f1\b \cf4 data
+\f0\b0 \cf0  ameshousing3_split2;\
+	\cf3 set\cf0  ameshousing3_split;\
+	\cf3 if\cf0  Selected = 
+\f1\b \cf5 1
+\f0\b0 \cf0  \cf3 then\cf0  SalePrice = 
+\f1\b \cf5 .
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 reg
+\f0\b0 \cf0  \cf3 data\cf0 =ameshousing3_split2;\
+	\cf3 model\cf0  SalePrice = Basement_Area Lot_Area;\
+    \cf3 title\cf0  \cf6 "Model with Basement Area and Lot Area"\cf0 ;\
+	\cf3 output\cf0  \cf3 out\cf0  = Scored \cf3 predicted\cf0 =pred;\
+	\cf3 title\cf0  \cf6 'Sale Price Regression'\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 quit
+\f0\b0 \cf0 ; \
+\
+
+\f1\b \cf4 data
+\f0\b0 \cf0  Scored;\
+	\cf3 set\cf0  Scored;\
+	\cf3 if\cf0  SalePrice ne 
+\f1\b \cf5 .
+\f0\b0 \cf0  \cf3 then\cf0  \cf3 delete\cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 data
+\f0\b0 \cf0  Scored;\
+	\cf3 merge\cf0  Scored ameshousing3_valid;\
+	\cf3 keep\cf0  SalePrice Pred;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 data
+\f0\b0 \cf0  MAPE_v;\
+	\cf3 set\cf0  Scored;\
+	AE = abs(Pred - SalePrice);\
+	APE = (abs(Pred - SalePrice) / SalePrice)*
+\f1\b \cf5 100
+\f0\b0 \cf0 ;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf4 proc
+\f0\b0 \cf0  
+\f1\b \cf4 means
+\f0\b0 \cf0  \cf3 data\cf0 =MAPE_v \cf3 mean\cf0 ;\
+	\cf3 var\cf0  AE APE;\
+
+\f1\b \cf4 run
+\f0\b0 \cf0 ;\
+\
+\
+\cf2 *ods rtf close;\cf0 \
+\cf2 *ods html;\cf0 \
+}

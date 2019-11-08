@@ -1,0 +1,497 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2511
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica-Bold;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue128;\red0\green0\blue255;\red128\green0\blue128;
+\red0\green128\blue128;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c50196;\csgenericrgb\c0\c0\c100000;\csgenericrgb\c50196\c0\c50196;
+\csgenericrgb\c0\c50196\c50196;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\b\fs20 \cf2 proc
+\f1\b0 \cf0  
+\f0\b \cf2 format
+\f1\b0 \cf0 ;\
+\
+\cf3 value\cf0  $MS_SubClass\
+\
+       \cf4 "020"\cf0 =\cf4 "1-STORY 1946 AND NEWER ALL STYLES"\cf0 \
+       \cf4 "030"\cf0 =\cf4 "1-STORY 1945 AND OLDER"\cf0 \
+       \cf4 "040"\cf0 =\cf4 "1-STORY W/FINISHED ATTIC ALL AGES"\cf0 \
+       \cf4 "045"\cf0 =\cf4 "1-1/2 STORY - UNFINISHED ALL AGES"\cf0 \
+       \cf4 "050"\cf0 =\cf4 "1-1/2 STORY FINISHED ALL AGES"\cf0 \
+       \cf4 "060"\cf0 =\cf4 "2-STORY 1946 AND NEWER"\cf0 \
+       \cf4 "070"\cf0 =\cf4 "2-STORY 1945 AND OLDER"\cf0 \
+       \cf4 "075"\cf0 =\cf4 "2-1/2 STORY ALL AGES"\cf0 \
+       \cf4 "080"\cf0 =\cf4 "SPLIT OR MULTI-LEVEL"\cf0 \
+       \cf4 "085"\cf0 =\cf4 "SPLIT FOYER"\cf0 \
+       \cf4 "090"\cf0 =\cf4 "DUPLEX - ALL STYLES AND AGES"\cf0 \
+       \cf4 "120"\cf0 =\cf4 "1-STORY PUD (Planned Unit Development) - 1946 AND NEWER"\cf0 \
+       \cf4 "150"\cf0 =\cf4 "1-1/2 STORY PUD - ALL AGES"\cf0 \
+       \cf4 "160"\cf0 =\cf4 "2-STORY PUD - 1946 AND NEWER"\cf0 \
+       \cf4 "180"\cf0 =\cf4 "PUD - MULTILEVEL - INCL SPLIT LEV/FOYER"\cf0 \
+       \cf4 "190"\cf0 =\cf4 "2 FAMILY CONVERSION - ALL STYLES AND AGES"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $MS_Zoning\
+       \cf4 "A"\cf0 =\cf4 "Agriculture"\cf0 \
+       \cf4 "C"\cf0 =\cf4 "Commercial"\cf0 \
+       \cf4 "FV"\cf0 =\cf4 "Floating Village Residential"\cf0 \
+       \cf4 "I"\cf0 =\cf4 "Industrial"\cf0 \
+       \cf4 "RH"\cf0 =\cf4 "Residential High Density"\cf0 \
+       \cf4 "RL"\cf0 =\cf4 "Residential Low Density"\cf0 \
+       \cf4 "RP"\cf0 =\cf4 "Residential Low Density Park"\cf0 \
+       \cf4 "RM"\cf0 =\cf4 "Residential Medium Density"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Street\
+       \cf4 "Grvl"\cf0 =\cf4 "Gravel"\cf0 \
+       \cf4 "Pave"\cf0 =\cf4 "Paved"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Alley\
+\
+       \cf4 "Grvl"\cf0 =\cf4 "Gravel"\cf0 \
+       \cf4 "Pave"\cf0 =\cf4 "Paved"\cf0 \
+       \cf4 "NA "\cf0 =\cf4 "No alley access"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Lot_Shape\
+\
+       \cf4 "Reg"\cf0 =\cf4 "Regular"\cf0 \
+       \cf4 "IR1"\cf0 =\cf4 "Slightly irregular"\cf0 \
+       \cf4 "IR2"\cf0 =\cf4 "Moderately Irregular"\cf0 \
+       \cf4 "IR3"\cf0 =\cf4 "Irregular"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Land_Contour\
+\
+       \cf4 "Lvl"\cf0 =\cf4 "Near Flat/Level"\cf0 \
+       \cf4 "Bnk"\cf0 =\cf4 "Banked - Quick and significant rise from street grade to building"\cf0 \
+       \cf4 "HLS"\cf0 =\cf4 "Hillside - Significant slope from side to side"\cf0 \
+       \cf4 "Low"\cf0 =\cf4 "Depression"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Utilities\
+\
+       \cf4 "AllPub"\cf0 =\cf4 "All public Utilities (E,G,W,AND S)"\cf0 \
+       \cf4 "NoSewr"\cf0 =\cf4 "Electricity, Gas, and Water (Septic Tank)"\cf0 \
+       \cf4 "NoSeWa"\cf0 =\cf4 "Electricity and Gas Only"\cf0 \
+       \cf4 "ELO"\cf0 =\cf4 "Electricity only"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Lot_Config\
+\
+       \cf4 "Inside"\cf0 =\cf4 "Inside lot"\cf0 \
+       \cf4 "Corner"\cf0 =\cf4 "Corner lot"\cf0 \
+       \cf4 "CulDSac"\cf0 =\cf4 "Cul-de-sac"\cf0 \
+       \cf4 "FR2"\cf0 =\cf4 "Frontage on 2 sides of property"\cf0 \
+       \cf4 "FR3"\cf0 =\cf4 "Frontage on 3 sides of property"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Land_Slope\
+\
+       \cf4 "Gtl"\cf0 =\cf4 "Gentle slope"\cf0 \
+       \cf4 "Mod"\cf0 =\cf4 "Moderate Slope"\cf0 \
+       \cf4 "Sev"\cf0 =\cf4 "Severe Slope"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Neighborhood\
+\
+       \cf4 "Blmngtn"\cf0 =\cf4 "Bloomington Heights"\cf0 \
+       \cf4 "Blueste"\cf0 =\cf4 "Bluestem"\cf0 \
+       \cf4 "BrDale"\cf0 =\cf4 "Briardale"\cf0 \
+       \cf4 "BrkSide"\cf0 =\cf4 "Brookside"\cf0 \
+       \cf4 "ClearCr"\cf0 =\cf4 "Clear Creek"\cf0 \
+       \cf4 "CollgCr"\cf0 =\cf4 "College Creek"\cf0 \
+       \cf4 "Crawfor"\cf0 =\cf4 "Crawford"\cf0 \
+       \cf4 "Edwards"\cf0 =\cf4 "Edwards"\cf0 \
+       \cf4 "Gilbert"\cf0 =\cf4 "Gilbert"\cf0 \
+       \cf4 "Greens"\cf0 =\cf4 "Greens"\cf0 \
+       \cf4 "GrnHill"\cf0 =\cf4 "Green Hills"\cf0 \
+       \cf4 "IDOTRR"\cf0 =\cf4 "Iowa DOT and Rail Road"\cf0 \
+       \cf4 "Landmrk"\cf0 =\cf4 "Landmark"\cf0 \
+       \cf4 "MeadowV"\cf0 =\cf4 "Meadow Village"\cf0 \
+       \cf4 "Mitchel"\cf0 =\cf4 "Mitchell"\cf0 \
+       \cf4 "Names"\cf0 =\cf4 "North Ames"\cf0 \
+       \cf4 "NoRidge"\cf0 =\cf4 "Northridge"\cf0 \
+       \cf4 "NPkVill"\cf0 =\cf4 "Northpark Villa"\cf0 \
+       \cf4 "NridgHt"\cf0 =\cf4 "Northridge Heights"\cf0 \
+       \cf4 "NWAmes"\cf0 =\cf4 "Northwest Ames"\cf0 \
+       \cf4 "OldTown"\cf0 =\cf4 "Old Town"\cf0 \
+       \cf4 "SWISU"\cf0 =\cf4 "South AND West of Iowa State University"\cf0 \
+       \cf4 "Sawyer"\cf0 =\cf4 "Sawyer"\cf0 \
+       \cf4 "SawyerW"\cf0 =\cf4 "Sawyer West"\cf0 \
+       \cf4 "Somerst"\cf0 =\cf4 "Somerset"\cf0 \
+       \cf4 "StoneBr"\cf0 =\cf4 "Stone Brook"\cf0 \
+       \cf4 "Timber"\cf0 =\cf4 "Timberland"\cf0 \
+       \cf4 "Veenker"\cf0 =\cf4 "Veenker"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Condition\
+\
+       \cf4 "Artery"\cf0 =\cf4 "Adjacent to arterial street"\cf0 \
+       \cf4 "Feedr"\cf0 =\cf4 "Adjacent to feeder street"\cf0 \
+       \cf4 "Norm"\cf0 =\cf4 "Normal"\cf0 \
+       \cf4 "RRNn"\cf0 =\cf4 "Within 200' of North-South Railroad"\cf0 \
+       \cf4 "RRAn"\cf0 =\cf4 "Adjacent to North-South Railroad"\cf0 \
+       \cf4 "PosN"\cf0 =\cf4 "Near positive off-site feature--park, greenbelt, etc."\cf0 \
+       \cf4 "PosA"\cf0 =\cf4 "Adjacent to postive off-site feature"\cf0 \
+       \cf4 "RRNe"\cf0 =\cf4 "Within 200' of East-West Railroad"\cf0 \
+       \cf4 "RRAe"\cf0 =\cf4 "Adjacent to East-West Railroad"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Bldg_Type\
+\
+       \cf4 "1Fam"\cf0 =\cf4 "Single-family Detached"\cf0 \
+       \cf4 "2FmCon"\cf0 =\cf4 "Two-family Conversion; originally built as one-family dwelling"\cf0 \
+       \cf4 "Duplx"\cf0 =\cf4 "Duplex"\cf0 \
+       \cf4 "TwnhsE"\cf0 =\cf4 "Townhouse End Unit"\cf0 \
+       \cf4 "TwnhsI"\cf0 =\cf4 "Townhouse Inside Unit"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $House_Style\
+\
+       \cf4 "1Story"\cf0 =\cf4 "One story"\cf0 \
+       \cf4 "1.5Fin"\cf0 =\cf4 "One and one-half story: 2nd level finished"\cf0 \
+       \cf4 "1.5Unf"\cf0 =\cf4 "One and one-half story: 2nd level unfinished"\cf0 \
+       \cf4 "2Story"\cf0 =\cf4 "Two story"\cf0 \
+       \cf4 "2.5Fin"\cf0 =\cf4 "Two and one-half story: 2nd level finished"\cf0 \
+       \cf4 "2.5Unf"\cf0 =\cf4 "Two and one-half story: 2nd level unfinished"\cf0 \
+       \cf4 "SFoyer"\cf0 =\cf4 "Split Foyer"\cf0 \
+       \cf4 "SLvl"\cf0 =\cf4 "Split Level"\cf0 \
+       ;\
+\
+\cf3 value\cf0  Overall\
+\
+       
+\f0\b \cf5 10
+\f1\b0 \cf0 =\cf4 "10 Very Excellent"\cf0 \
+       
+\f0\b \cf5 9
+\f1\b0 \cf0 =\cf4 "09 Excellent"\cf0 \
+       
+\f0\b \cf5 8
+\f1\b0 \cf0 =\cf4 "08 Very Good"\cf0 \
+       
+\f0\b \cf5 7
+\f1\b0 \cf0 =\cf4 "07 Good"\cf0 \
+       
+\f0\b \cf5 6
+\f1\b0 \cf0 =\cf4 "06 Above Average"\cf0 \
+       
+\f0\b \cf5 5
+\f1\b0 \cf0 =\cf4 "05 Average"\cf0 \
+       
+\f0\b \cf5 4
+\f1\b0 \cf0 =\cf4 "04 Below Average"\cf0 \
+       
+\f0\b \cf5 3
+\f1\b0 \cf0 =\cf4 "03 Fair"\cf0 \
+       
+\f0\b \cf5 2
+\f1\b0 \cf0 =\cf4 "02 Poor"\cf0 \
+       
+\f0\b \cf5 1
+\f1\b0 \cf0 =\cf4 "01 Very Poor"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Roof_Style\
+\
+       \cf4 "Flat"\cf0 =\cf4 "Flat"\cf0 \
+       \cf4 "Gable"\cf0 =\cf4 "Gable"\cf0 \
+       \cf4 "Gambrel"\cf0 =\cf4 "Gabrel (Barn)"\cf0 \
+       \cf4 "Hip"\cf0 =\cf4 "Hip"\cf0 \
+       \cf4 "Mansard"\cf0 =\cf4 "Mansard"\cf0 \
+       \cf4 "Shed"\cf0 =\cf4 "Shed"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Roof_Matl\
+\
+       \cf4 "ClyTile"\cf0 =\cf4 "Clay or Tile"\cf0 \
+       \cf4 "CompShg"\cf0 =\cf4 "Standard (Composite) Shingle"\cf0 \
+       \cf4 "Membran"\cf0 =\cf4 "Membrane"\cf0 \
+       \cf4 "Metal"\cf0 =\cf4 "Metal"\cf0 \
+       \cf4 "Roll"\cf0 =\cf4 "Roll"\cf0 \
+       \cf4 "TarANDGrv"\cf0 =\cf4 "Gravel AND Tar"\cf0 \
+       \cf4 "WdShake"\cf0 =\cf4 "Wood Shakes"\cf0 \
+       \cf4 "WdShngl"\cf0 =\cf4 "Wood Shingles"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Exterior\
+\
+       \cf4 "AsbShng"\cf0 =\cf4 "Asbestos Shingles"\cf0 \
+       \cf4 "AsphShn"\cf0 =\cf4 "Asphalt Shingles"\cf0 \
+       \cf4 "BrkComm"\cf0 =\cf4 "Brick Common"\cf0 \
+       \cf4 "BrkFace"\cf0 =\cf4 "Brick Face"\cf0 \
+       \cf4 "CBlock"\cf0 =\cf4 "Cinder Block"\cf0 \
+       \cf4 "CemntBd"\cf0 =\cf4 "Cement Board"\cf0 \
+       \cf4 "HdBoard"\cf0 =\cf4 "Hard Board"\cf0 \
+       \cf4 "ImStucc"\cf0 =\cf4 "Imitation Stucco"\cf0 \
+       \cf4 "MetalSd"\cf0 =\cf4 "Metal Siding"\cf0 \
+       \cf4 "Other"\cf0 =\cf4 "Other"\cf0 \
+       \cf4 "Plywood"\cf0 =\cf4 "Plywood"\cf0 \
+       \cf4 "PreCast"\cf0 =\cf4 "PreCast"\cf0 \
+       \cf4 "Stone"\cf0 =\cf4 "Stone"\cf0 \
+       \cf4 "Stucco"\cf0 =\cf4 "Stucco"\cf0 \
+       \cf4 "VinylSd"\cf0 =\cf4 "Vinyl Siding"\cf0 \
+       \cf4 "Wd Sdng"\cf0 =\cf4 "Wood Siding"\cf0 \
+       \cf4 "WdShing"\cf0 =\cf4 "Wood Shingles"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Mas_Vnr_Type\
+\
+       \cf4 "BrkCmn"\cf0 =\cf4 "Brick Common"\cf0 \
+       \cf4 "BrkFace"\cf0 =\cf4 "Brick Face"\cf0 \
+       \cf4 "CBlock"\cf0 =\cf4 "Cinder Block"\cf0 \
+       \cf4 "None"\cf0 =\cf4 "None"\cf0 \
+       \cf4 "Stone"\cf0 =\cf4 "Stone"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Exter_Qual \
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Average/Typical"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Exter_Cond\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Average/Typical"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Foundation\
+\
+       \cf4 "BrkTil"\cf0 =\cf4 "Brick AND Tile"\cf0 \
+       \cf4 "CBlock"\cf0 =\cf4 "Cinder Block"\cf0 \
+       \cf4 "PConc"\cf0 =\cf4 "Poured Contrete"\cf0 \
+       \cf4 "Slab"\cf0 =\cf4 "Slab"\cf0 \
+       \cf4 "Stone"\cf0 =\cf4 "Stone"\cf0 \
+       \cf4 "Wood"\cf0 =\cf4 "Wood"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Bsmt_Qual\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent (100+ inches)"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good (90-99 inches)"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Typical (80-89 inches)"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair (70-79 inches)"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor (<70 inches"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Basement"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Bsmt_Cond\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Typical - slight dampness allowed"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair - dampness or some cracking or settling"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor - Severe cracking, settling, or wetness"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Basement"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Bsmt_Exposure\
+\
+       \cf4 "Gd"\cf0 =\cf4 "Good Exposure"\cf0 \
+       \cf4 "Av"\cf0 =\cf4 "Average Exposure (split levels or foyers typically score average or above)"\cf0 \
+       \cf4 "Mn"\cf0 =\cf4 "Mimimum Exposure"\cf0 \
+       \cf4 "No"\cf0 =\cf4 "No Exposure"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Basement"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $BsmtFinType\
+\
+       \cf4 "GLQ"\cf0 =\cf4 "Good Living Quarters"\cf0 \
+       \cf4 "ALQ"\cf0 =\cf4 "Average Living Quarters"\cf0 \
+       \cf4 "BLQ"\cf0 =\cf4 "Below Average Living Quarters"\cf0 \
+       \cf4 "Rec"\cf0 =\cf4 "Average Rec Room"\cf0 \
+       \cf4 "LwQ"\cf0 =\cf4 "Low Quality"\cf0 \
+       \cf4 "Unf"\cf0 =\cf4 "Unfinshed"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Basement"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Heating\
+\
+       \cf4 "Floor"\cf0 =\cf4 "Floor Furnace"\cf0 \
+       \cf4 "GasA"\cf0 =\cf4 "Gas forced warm air furnace"\cf0 \
+       \cf4 "GasW"\cf0 =\cf4 "Gas hot water or steam heat"\cf0 \
+       \cf4 "Grav"\cf0 =\cf4 "Gravity furnace"\cf0 \
+       \cf4 "OthW"\cf0 =\cf4 "Hot water or steam heat other than gas"\cf0 \
+       \cf4 "Wall"\cf0 =\cf4 "Wall furnace"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Heating_QC\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Average/Typical"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $NoYes\
+\
+       \cf4 "N"\cf0 =\cf4 "No"\cf0 \
+       \cf4 "Y"\cf0 =\cf4 "Yes"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Electrical\
+\
+       \cf4 "SBrkr"\cf0 =\cf4 "Standard Circuit Breakers AND Romex"\cf0 \
+       \cf4 "FuseA"\cf0 =\cf4 "Fuse Box over 60 AMP and all Romex wiring (Average)"\cf0 \
+       \cf4 "FuseF"\cf0 =\cf4 "60 AMP Fuse Box and mostly Romex wiring (Fair)"\cf0 \
+       \cf4 "FuseP"\cf0 =\cf4 "60 AMP Fuse Box and mostly knob AND tube wiring (poor)"\cf0 \
+       \cf4 "Mix"\cf0 =\cf4 "Mixed"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $KitchenQual\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Typical/Average"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Functional\
+\
+       \cf4 "Typ"\cf0 =\cf4 "Typical Functionality"\cf0 \
+       \cf4 "Min1"\cf0 =\cf4 "Minor Deductions 1"\cf0 \
+       \cf4 "Min2"\cf0 =\cf4 "Minor Deductions 2"\cf0 \
+       \cf4 "Mod"\cf0 =\cf4 "Moderate Deductions"\cf0 \
+       \cf4 "Maj1"\cf0 =\cf4 "Major Deductions 1"\cf0 \
+       \cf4 "Maj2"\cf0 =\cf4 "Major Deductions 2"\cf0 \
+       \cf4 "Sev"\cf0 =\cf4 "Severely Damaged"\cf0 \
+       \cf4 "Sal"\cf0 =\cf4 "Salvage only"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $FireplaceQu\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent - Exceptional Masonry Fireplace"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good - Masonry Fireplace in main level"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Average - Prefabricated Fireplace in main living area or Masonry Fireplace in basement"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair - Prefabricated Fireplace in basement"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor - Ben Franklin Stove"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Fireplace"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Garage_Type\
+\
+       \cf4 "2Types"\cf0 =\cf4 "More than one type of garage"\cf0 \
+       \cf4 "Attchd"\cf0 =\cf4 "Attached to home"\cf0 \
+       \cf4 "Basment"\cf0 =\cf4 "Basement Garage"\cf0 \
+       \cf4 "BuiltIn"\cf0 =\cf4 "Built-In (Garage part of house - typically has room above garage)"\cf0 \
+       \cf4 "CarPort"\cf0 =\cf4 "Car Port"\cf0 \
+       \cf4 "Detchd"\cf0 =\cf4 "Detached from home"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Garage"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Garage_Finish\
+\
+       \cf4 "Fin"\cf0 =\cf4 "Finished"\cf0 \
+       \cf4 "RFn"\cf0 =\cf4 "Rough Finished"\cf0 \
+       \cf4 "Unf"\cf0 =\cf4 "Unfinished"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Garage"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Garage_Qual\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Typical/Average"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Garage"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Garage_Cond\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Typical/Average"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair"\cf0 \
+       \cf4 "Po"\cf0 =\cf4 "Poor"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Garage"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Paved_Drive\
+\
+       \cf4 "Y"\cf0 =\cf4 "Paved "\cf0 \
+       \cf4 "P"\cf0 =\cf4 "Partial Pavement"\cf0 \
+       \cf4 "N"\cf0 =\cf4 "Dirt/Gravel"\cf0 ;\
+    \
+\cf3 value\cf0  $Value_Pool_QC\
+\
+       \cf4 "Ex"\cf0 =\cf4 "Excellent"\cf0 \
+       \cf4 "Gd"\cf0 =\cf4 "Good"\cf0 \
+       \cf4 "TA"\cf0 =\cf4 "Average/Typical"\cf0 \
+       \cf4 "Fa"\cf0 =\cf4 "Fair"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Pool"\cf0 ;\
+\
+\cf3 value\cf0  $Value_Fence\
+\
+       \cf4 "GdPrv"\cf0 =\cf4 "Good Privacy"\cf0 \
+       \cf4 "MnPrv"\cf0 =\cf4 "Minimum Privacy"\cf0 \
+       \cf4 "GdWo"\cf0 =\cf4 "Good Wood"\cf0 \
+       \cf4 "MnWw"\cf0 =\cf4 "Minimum Wood/Wire"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "No Fence"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Misc_Feature\
+\
+       \cf4 "Elev"\cf0 =\cf4 "Elevator"\cf0 \
+       \cf4 "Gar2"\cf0 =\cf4 "2nd Garage (if not described in garage section)"\cf0 \
+       \cf4 "Othr"\cf0 =\cf4 "Other"\cf0 \
+       \cf4 "Shed"\cf0 =\cf4 "Shed (over 100 SF)"\cf0 \
+       \cf4 "TenC"\cf0 =\cf4 "Tennis Court"\cf0 \
+       \cf4 "NA"\cf0 =\cf4 "None"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Sale_Type\
+\
+       \cf4 "WD "\cf0 =\cf4 "Warranty Deed - Conventional"\cf0 \
+       \cf4 "CWD"\cf0 =\cf4 "Warranty Deed - Cash"\cf0 \
+       \cf4 "VWD"\cf0 =\cf4 "Warranty Deed - VA Loan"\cf0 \
+       \cf4 "New"\cf0 =\cf4 "Home just constructed and sold"\cf0 \
+       \cf4 "COD"\cf0 =\cf4 "Court Officer Deed/Estate"\cf0 \
+       \cf4 "Con"\cf0 =\cf4 "Contract 15% Down payment regular terms"\cf0 \
+       \cf4 "ConLw"\cf0 =\cf4 "Contract Low Down payment and low interest"\cf0 \
+       \cf4 "ConLI"\cf0 =\cf4 "Contract Low Interest"\cf0 \
+       \cf4 "ConLD"\cf0 =\cf4 "Contract Low Down"\cf0 \
+       \cf4 "Oth"\cf0 =\cf4 "Other"\cf0 \
+       ;\
+\
+\cf3 value\cf0  $Sale_Condition\
+\
+       \cf4 "Normal"\cf0 =\cf4 "Normal Sale"\cf0 \
+       \cf4 "Abnorml"\cf0 =\cf4 "Abnormal Sale - trade, foreclosure, short sale"\cf0 \
+       \cf4 "AdjLand"\cf0 =\cf4 "Adjoining Land Purchase"\cf0 \
+       \cf4 "Alloca"\cf0 =\cf4 "Allocation - two linked properties with separate deeds, typically condo with a garage unit"\cf0 \
+       \cf4 "Family"\cf0 =\cf4 "Sale between family members"\cf0 \
+       \cf4 "Partial"\cf0 =\cf4 "Home was not completed when last assessed (associated with New Homes)"\cf0 \
+       ;\
+\
+\cf3 value\cf0  season \
+       
+\f0\b \cf5 1
+\f1\b0 \cf0 =\cf4 "Winter"\cf0 \
+       
+\f0\b \cf5 2
+\f1\b0 \cf0 =\cf4 "Spring"\cf0 \
+       
+\f0\b \cf5 3
+\f1\b0 \cf0 =\cf4 "Summer"\cf0 \
+       
+\f0\b \cf5 4
+\f1\b0 \cf0 =\cf4 "Fall"\cf0 \
+       ;\
+
+\f0\b \cf2 run
+\f1\b0 \cf0 ;\
+}

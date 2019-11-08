@@ -1,0 +1,262 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2511
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green128\blue0;\red0\green0\blue128;\red0\green0\blue255;
+\red0\green128\blue128;\red128\green0\blue128;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c50196\c0;\csgenericrgb\c0\c0\c50196;\csgenericrgb\c0\c0\c100000;
+\csgenericrgb\c0\c50196\c50196;\csgenericrgb\c50196\c0\c50196;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs20 \cf2 /******************************************************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\cf2 /***************    Day 12 / Lab 12     ***************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\
+\cf2 *ods html close;\cf0 \
+\cf2 *ods rtf file="Categorical Data Analysis SAS Report.rtf";\cf0 \
+\cf2 *ods rtf;\cf0 \
+\cf2 *options nodate nonumber ls=95 ps=80;\cf0 \
+\
+\cf2 /*******************************/\cf0 \
+\cf2 /* Describing Categorical Data */\cf0 \
+\cf2 /*******************************/\cf0 \
+\
+\cf2 /* Setting Format for Target Variable */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 format
+\f0\b0 \cf0 ;\
+    \cf4 value\cf0  bonusfmt 
+\f1\b \cf5 1
+\f0\b0 \cf0  = \cf6 "Bonus Eligible"\cf0 \
+                   
+\f1\b \cf5 0
+\f0\b0 \cf0  = \cf6 "Not Bonus Eligible"\cf0 \
+                  ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Examining Distributions - Categorical Predictors */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 freq
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3;\
+    \cf4 tables\cf0  Bonus Fireplaces Lot_Shape_2\
+           Fireplaces*Bonus Lot_Shape_2*Bonus/\
+           plots(only)=freqplot(\cf4 scale\cf0 =percent);\
+    \cf4 format\cf0  Bonus \cf5 bonusfmt.\cf0 ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Examining Distributions - Continuous Predictors */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 univariate
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3 \cf4 noprint\cf0 ;\
+    \cf4 class\cf0  Bonus;\
+    \cf4 var\cf0  Basement_Area ;\
+    \cf4 histogram\cf0  Basement_Area;\
+    \cf4 inset\cf0  \cf4 mean\cf0  \cf4 std\cf0  \cf4 median\cf0  \cf4 min\cf0  \cf4 max\cf0  / \cf4 format\cf0 =
+\f1\b \cf5 5.2
+\f0\b0 \cf0  \cf4 position\cf0 =nw;\
+    \cf4 format\cf0  Bonus \cf5 bonusfmt.\cf0 ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\
+\cf2 /************************/\cf0 \
+\cf2 /* Tests of Association */\cf0 \
+\cf2 /************************/\cf0 \
+\
+\cf2 /* Chi-Square Test */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 freq
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3;\
+    \cf4 tables\cf0  (Lot_Shape_2 Fireplaces)*Bonus\
+          / \cf4 chisq\cf0  \cf4 expected\cf0  \cf4 cellchi2\cf0  \cf4 nocol\cf0  \cf4 nopercent\cf0  \
+            \cf4 relrisk\cf0 ;\
+    \cf4 format\cf0  Bonus \cf5 bonusfmt.\cf0 ;\
+    \cf4 title\cf0  \cf6 'Associations with Bonus'\cf0 ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Detecting Ordinal Associations */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 freq
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3;\
+    \cf4 tables\cf0  Fireplaces*Bonus / \cf4 chisq\cf0  \cf4 measures\cf0  cl;\
+    \cf4 format\cf0  Bonus \cf5 bonusfmt.\cf0 ;\
+    \cf4 title\cf0  \cf6 'Ordinal Association between FIREPLACES and BONUS?'\cf0 ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\
+\
+\cf2 /******************************************************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\cf2 /***************    Day 13 / Lab 13     ***************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\cf2 /******************************************************/\cf0 \
+\
+\cf2 /***************************************/\cf0 \
+\cf2 /* Introduction to Logistic Regression */\cf0 \
+\cf2 /***************************************/\cf0 \
+\
+\cf2 /* Simple Logistic Regression Model */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 logistic
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3 \cf4 alpha\cf0 =
+\f1\b \cf5 0.05
+\f0\b0 \cf0 \
+              plots(\cf4 only\cf0 )=(effect oddsratio);\
+    \cf4 model\cf0  Bonus(\cf4 event\cf0 =\cf6 '1'\cf0 )=Basement_Area / \cf4 clodds\cf0 =pl;\
+    \cf4 title\cf0  \cf6 'LOGISTIC MODEL (1):Bonus=Basement_Area'\cf0 ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Multiple Logistic Regression Model */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 logistic
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3 plots(\cf4 only\cf0 )=(effect oddsratio);\
+    \cf4 class\cf0  Fireplaces(\cf4 ref\cf0 =\cf6 '0'\cf0 ) Lot_Shape_2(\cf4 ref\cf0 =\cf6 'Regular'\cf0 ) / \cf4 param\cf0 =ref;\
+    \cf4 model\cf0  Bonus(\cf4 event\cf0 =\cf6 '1'\cf0 )=Basement_Area Fireplaces Lot_Shape_2 / \cf4 clodds\cf0 =pl;\
+    \cf4 units\cf0  Basement_Area=
+\f1\b \cf5 100
+\f0\b0 \cf0 ;\
+    \cf4 title\cf0  \cf6 'LOGISTIC MODEL (2):Bonus= Basement_Area Fireplaces Lot_Shape_2'\cf0 ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Logistic Regression - Backward Elimination */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 logistic
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3 plots(\cf4 only\cf0 )=(effect oddsratio);\
+    \cf4 class\cf0  Fireplaces(\cf4 ref\cf0 =\cf6 '0'\cf0 ) Lot_Shape_2(\cf4 ref\cf0 =\cf6 'Regular'\cf0 ) / \cf4 param\cf0 =ref;\
+    \cf4 model\cf0  Bonus(\cf4 event\cf0 =\cf6 '1'\cf0 )=Basement_Area|Fireplaces|Lot_Shape_2 @
+\f1\b \cf5 2
+\f0\b0 \cf0  / \
+          \cf4 selection\cf0 =backward \cf4 clodds\cf0 =pl \cf4 slstay\cf0 =
+\f1\b \cf5 0.10
+\f0\b0 \cf0 ;\
+    \cf4 units\cf0  Basement_Area=
+\f1\b \cf5 100
+\f0\b0 \cf0 ;\
+    \cf4 title\cf0  \cf6 'LOGISTIC MODEL (3): Backward Elimination '\cf0 \
+           \cf6 'Bonus=Basement_Area|Fireplaces|Lot_Shape_2'\cf0 ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Logistic Regression - Predictions Using Score Statement */\cf0 \
+
+\f1\b \cf3 data
+\f0\b0 \cf0  newhouses;\
+	\cf4 length\cf0  Lot_Shape_2 $
+\f1\b \cf5 9
+\f0\b0 \cf0 ;\
+	\cf4 input\cf0  Fireplaces Lot_Shape_2 $ Basement_Area;\
+	\cf4 datalines\cf0 ;\
+	0  Regular    1060\
+	2  Regular     775\
+	2  Irregular  1100\
+	1  Irregular   975\
+	1  Regular     800\
+	;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 logistic
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3;\
+    \cf4 class\cf0  Fireplaces(\cf4 ref\cf0 =\cf6 '0'\cf0 ) Lot_Shape_2(\cf4 ref\cf0 =\cf6 'Regular'\cf0 ) / \cf4 param\cf0 =ref;\
+    \cf4 model\cf0  Bonus(\cf4 event\cf0 =\cf6 '1'\cf0 )=Basement_Area|Lot_Shape_2 Fireplaces;\
+    \cf4 units\cf0  Basement_Area=
+\f1\b \cf5 100
+\f0\b0 \cf0 ;\
+	\cf4 score\cf0  \cf4 data\cf0 =newhouses \cf4 out\cf0 =scored_houses;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\cf2 /* Logistic Regression - Predictions Using PROC PLM */\cf0 \
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 logistic
+\f0\b0 \cf0  \cf4 data\cf0 =bootcamp.ameshousing3;\
+    \cf4 class\cf0  Fireplaces(\cf4 ref\cf0 =\cf6 '0'\cf0 ) Lot_Shape_2(\cf4 ref\cf0 =\cf6 'Regular'\cf0 ) / \cf4 param\cf0 =ref;\
+    \cf4 model\cf0  Bonus(\cf4 event\cf0 =\cf6 '1'\cf0 )=Basement_Area|Lot_Shape_2 Fireplaces;\
+    \cf4 units\cf0  Basement_Area=
+\f1\b \cf5 100
+\f0\b0 \cf0 ;\
+	\cf4 store\cf0  \cf4 out\cf0 =isbonus;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf3 data
+\f0\b0 \cf0  newhouses;\
+	\cf4 length\cf0  Lot_Shape_2 $
+\f1\b \cf5 9
+\f0\b0 \cf0 ;\
+	\cf4 input\cf0  Fireplaces Lot_Shape_2 $ Basement_Area;\
+	\cf4 datalines\cf0 ;\
+	0  Regular    1060\
+	2  Regular     775\
+	2  Irregular  1100\
+	1  Irregular   975\
+	1  Regular     800\
+	;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 plm
+\f0\b0 \cf0  restore=isbonus;\
+	score data=newhouses out=scored_houses2 / ILINK;\
+	\cf4 title\cf0  \cf6 'Predictions using PROC PLM'\cf0 ;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+
+\f1\b \cf3 proc
+\f0\b0 \cf0  
+\f1\b \cf3 print
+\f0\b0 \cf0  \cf4 data\cf0 =scored_houses2;\
+
+\f1\b \cf3 run
+\f0\b0 \cf0 ;\
+\
+\cf2 *ods rtf close;\cf0 \
+\cf2 *ods html;\cf0 \
+}
