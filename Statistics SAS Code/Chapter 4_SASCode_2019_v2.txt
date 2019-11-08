@@ -62,7 +62,7 @@ run;
 quit;
 
 
-/* Best subsets in proc reg (proc glmselect does not have this yet)  */
+/* Best subsets in proc reg (proc glmselect does not have this)  */
 proc reg data=ameshousing3_train plots=cp;
   ALLPOSS: model SalePrice=&interval/selection=cp best=1;
   title "All possible model selection for SalePrice";
